@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class Cliente {
@@ -8,7 +11,20 @@ public class Cliente {
 	public String cpf;
 		
 	public boolean ehMaiorIdade() {
-		return true;
+		LocalDate nasc = nascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		if(LocalDate.now().until(nasc, ChronoUnit.YEARS) * -1 >= 18 )
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+	}
+	
+	public String toString(){
+		return String.format("maior : %s \n  ", ehMaiorIdade());
 	}
 	
 	public boolean ehCPFValido() {
